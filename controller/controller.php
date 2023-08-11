@@ -59,9 +59,10 @@ class Controller{
 
         if($accion->insertarLugar($nombre,$departamento,$municipio,$descripcion,$foto)){
             $lugares = $accion->listarTodosLugares();
+            echo "<script>alert('Se agregó $nombre correctamente');</script>";
             require_once(realpath($_SERVER["DOCUMENT_ROOT"]) .'/Turismo-Guatemalteco/view/admin/lugaresTuristicos.php');
         }else{
-            echo "<script>No pudo agregarse el lugar turistico, verifica que se ingresen todos los datos.</script>";
+            echo "<script>alert('No pudo agregarse el centro turistico, verifica los datos ingresados');</script>";
         }
 
         
