@@ -48,7 +48,7 @@
 
                 <div class="info__place">
                     <p class="info__title"><?php echo $lug['nombre'] ?></p>
-                    <img class="img" src=" <?php echo '../img/places/'.$lug['foto']?>" alt="a"><br>
+                    <img class="img" src=" <?php echo '../img/places/'.$lug['foto']?>" alt="<?php echo $lug['nombre']?>"><br>
                     <p class="info__general"><b>Departamento:</b> <?php echo $lug['departamento']?></p>
                     <p class="info__general"><b>Municipio:</b> <?php echo $lug['municipio']?></p><br>
                     <p class="info__general"><?php echo $lug['descripcion'] ?></p>
