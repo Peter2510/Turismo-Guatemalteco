@@ -255,6 +255,34 @@ table tr,td{
   font-size: 1.2rem;
 }
 
+.content__table{
+  padding: 7px 7px;
+}
+
+.options__edit__delete{
+    display: inline-block; /* Cambiar el comportamiento a bloque para aplicar márgenes */
+    margin: 10px;
+    font-size: 1rem;
+    border: 0.1rem solid black;
+    padding: 5px;
+    cursor: pointer;
+    background-color: #E7310B;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.options__edit__update{
+  display: inline-block; /* Cambiar el comportamiento a bloque para aplicar márgenes */
+  margin: 10px;
+  font-size: 1rem;
+  border: 0.1rem solid black;
+  padding: 5px;
+  cursor: pointer;
+  background-color: #18A3CF;
+  color: #FFFFFF;
+  text-decoration: none;  
+}
+
 .btn__table{
   background-color: #11BE0E ;
   color: white;
@@ -292,6 +320,34 @@ img {
   font-size: 1.1rem;
   
 }
+
+/* Estilos para el modal */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: white;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 5px;
+  width: 60%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close {
+  float: right;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
 
 
 /* Media query para dispositivos con una anchura máxima de 768px */

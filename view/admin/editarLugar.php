@@ -51,37 +51,42 @@ session_start();
     <div class="content">
   
     <form method="POST" action="index.php" class="form" enctype="multipart/form-data">
-    <h2 class="form__title" >Agregar Lugar</h2>
-    <input type="hidden" name="action" value="add">
+    <h2 class="form__title" >Editar Lugar</h2>
+    <input type="hidden" name="action" value="update">
+    <input type="hidden" name="id" value="<?php echo $lugar[0][0]['id']?>">
     <div class="form__container">
         <div class="form__group">
-            <input type="text" name="name" id="name" class="form__input" placeholder=" " required >
+            <input type="text" name="name" id="name" class="form__input" placeholder=" " value="<?php echo $lugar[0][0]['nombre']?>" required >
             <label for="name" class="form__label">Nombre del lugar turistico:</label>
             <span class="form__line"></span>
         </div>
         <div class="form__group">
-            <input type="text" name="department" id="department" class="form__input" placeholder=" " required >
+            <input type="text" name="department" id="department" class="form__input" placeholder=" " value="<?php echo $lugar[0][0]['departamento']?>" required >
             <label for="department" class="form__label">Departamento donde se ubica:</label>
             <span class="form__line"></span>
         </div>
 
         <div class="form__group">
-            <input type="text" name="municipality" id="municipality" class="form__input" placeholder=" " required >
+            <input type="text" name="municipality" id="municipality" class="form__input" placeholder=" " value="<?php echo $lugar[0][0]['municipio']?>" required >
             <label for="municipality" class="form__label">Municipio donde se ubica:</label>
             <span class="form__line"></span>
         </div>
 
         <div class="form__group">
-            <textarea type="text" name="description" id="description" class="form__input" placeholder=" " required ></textarea>
+            <textarea type="text" name="description" id="description" class="form__input" placeholder=" " required><?php echo $lugar[0][0]['descripcion']?></textarea>
             <label for="description" class="form__label">Descripción:</label>
             <span class="form__line"></span>
         </div>
 
         <div class="form__group">
-        <input name="photo" id="photo" class="form__input__file" type="file" required/>
+            <img src="<?php echo "../img/places/".$lugar[0][0]['foto']?>">
+        </div>
+
+        <div class="form__group">
+        <input name="photo" id="photo" class="form__input__file" type="file"/>
         </div>
         
-        <input type="submit"  class="form__submit" name="login" value="Agregar">
+        <input type="submit"  class="form__submit" name="login" value="Actualizar">
     </div>
 
 </form>

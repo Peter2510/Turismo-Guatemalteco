@@ -14,13 +14,13 @@ session_start();
 </head>
 <body>
 <?php
-    if (isset($_SESSION["usuario"])) :
+    if (isset($_SESSION["admin_sesion"])) :
     ?>
 
 
     <nav class="navbar">
         <div class="user-info">
-            <span>Bienvenido, <?php echo $_SESSION["usuario"];  ?></span>
+            <span>Bienvenido, <?php echo $_SESSION["admin_sesion"];  ?></span>
         </div>
         <ul class="nav-links">
             <li><a href="../../controller/logout.php" class="logout">Cerrar Sesión</a></li>

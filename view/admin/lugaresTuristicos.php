@@ -13,12 +13,12 @@
 <body>
 
     <?php
-    if (isset($_SESSION["usuario"])) :
+    if (isset($_SESSION["admin_sesion"])) :
     ?>
 
         <nav class="navbar">
             <div class="user-info">
-                <span>Bienvenido, <?php echo $_SESSION["usuario"];  ?></span>
+                <span>Bienvenido, <?php echo $_SESSION["admin_sesion"];  ?></span>
             </div>
             <ul class="nav-links">
                 <li><a href="../../controller/logout.php" class="logout">Cerrar Sesión</a></li>
@@ -32,8 +32,8 @@
             <div class="div-sidebar">
                 <h3 class="title-sidebar">Lugares</h3>
                 <ul>
-                <li><a href="index.php?o=add">Agregar</a></li>
-                <li><a href="index.php?o=edit">Editar</a></li>
+                    <li><a href="index.php?o=add">Agregar</a></li>
+                    <li><a href="index.php?o=edit">Editar</a></li>
                 </ul>
             </div>
 
@@ -49,17 +49,22 @@
             <p style="text-align: center;">Lugares registrados dentro de la web Turismo Guatemalteco</p><br>
             <table>
                 <tr>
-                    <td>NOMBRE</td>
-                    <td>ACCIÓN</td>
+                    <td style="text-align: center; padding: 7px;">NOMBRE</td>
+                    <td style="text-align: center; padding: 7px;">ACCIÓN</td>
                 </tr>
                 <tbody>
                     <?php
-                    if (isset($lugares)):
+                    if (isset($lugares)&&!empty($lugares)) :
                         foreach ($lugares as $key => $lugar)
                             foreach ($lugar as $lug) : ?>
                             <tr>
-                                <td><?php echo $lug['nombre'] ?></td>
-                                <td></td>
+                                <td class="content__table"><?php echo $lug['nombre'] ?></td>
+                                <td>
+                                    <div>
+                                    <a class="options__edit__update" href="index.php?o=update&id=<?php echo $lug['id'] ?>">Editar</a>
+                                        <a class="options__edit__delete" onclick="return confirm('¿Estás seguro de que deseas eliminar <?php echo $lug['nombre']; ?>?')" href="index.php?o=delete&id=<?php echo $lug['id'] ?>">Eliminar</a>
+                                    </div>
+                                </td>
                             </tr>
                         <?php endforeach ?>
                     <?php else : ?>
@@ -72,6 +77,7 @@
     <?php else : ?>
         <?php header("Location: ../../controller/logout.php"); ?>
     <?php endif ?>
+    <script src="../js/scripts.js"></script>
 </body>
 
 </html>

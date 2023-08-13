@@ -24,7 +24,7 @@ class Model
     /**INSERTAR ADMINISTRADORES */
     public function insertarAdmin($correo,$contrasenia,$usuario)
     {
-        $stmt = $this->conexion->prepare('INSERT INTO admin VALUES (:correo, ,:contrasenia),:usuario)');
+        $stmt = $this->conexion->prepare('INSERT INTO admin VALUES (:correo,:contrasenia),:usuario)');
         $stmt->execute(array('correo' => $correo,'contrasenia' => $contrasenia,'usuario'=>$usuario));
 
         if ($stmt) {
@@ -49,7 +49,7 @@ class Model
     /**INSERTAR USUARIOS */
     public function insertarUsuario($nombre, $correo,$contrasenia,$usuario)
     {
-        $stmt = $this->conexion->prepare('INSERT INTO usuario VALUES (:nombre,:correo, ,:contrasenia,:usuario)');
+        $stmt = $this->conexion->prepare('INSERT INTO usuario VALUES (:nombre,:correo,:contrasenia,:usuario)');
         $stmt->execute(array('nombre'=>$nombre,'correo' => $correo,'contrasenia' => $contrasenia,'usuario'=>$usuario));
         if ($stmt) {
             return true;
@@ -83,12 +83,42 @@ class Model
         }
     }
 
+    /** EDITAR LUGAR */
+
+    public function editarLugarSF($id, $nombre,$departamento,$municipio,$descripcion)
+    {
+        $stmt = $this->conexion->prepare('UPDATE lugar SET nombre = :nombre, departamento= :departamento, municipio = :municipio, descripcion = :descripcion WHERE id = :id');
+        $stmt->execute(array('nombre'=>$nombre,'departamento'=>$departamento,'municipio'=>$municipio,'descripcion' => $descripcion, 'id' =>$id  ));
+
+        if ($stmt) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function editarLugarCF($id, $nombre,$departamento,$municipio,$descripcion,$foto)
+    {
+        
+        $arrayPhoto = $this->obtenerFoto($id);
+        unlink(realpath($_SERVER["DOCUMENT_ROOT"]) .'/Turismo-Guatemalteco/view/img/places/'.$arrayPhoto[0][0]["foto"]);
+        $stmt = $this->conexion->prepare('UPDATE lugar SET nombre = :nombre, departamento= :departamento, municipio = :municipio, descripcion = :descripcion, foto = :foto WHERE id = :id');
+        $stmt->execute(array('nombre'=>$nombre,'departamento'=>$departamento,'municipio'=>$municipio,'descripcion' => $descripcion,'foto'=>$foto, 'id'=> $id ));
+
+        if ($stmt) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /**ELIMINAR LUGAR */
     public function eliminarLugar($id)
     {
-        $stmt = $this->conexion->prepare('DELETE FROM lugar WHERE = :id ');
+        $arrayPhoto = ( $this->obtenerFoto($id));
+        unlink(realpath($_SERVER["DOCUMENT_ROOT"]) .'/Turismo-Guatemalteco/view/img/places/'.$arrayPhoto[0][0]["foto"]);
+        $stmt = $this->conexion->prepare('DELETE FROM lugar WHERE id = :id');
         $stmt->execute(array('id'=>$id));
-
         if ($stmt) {
             return true;
         } else {
@@ -107,4 +137,26 @@ class Model
         }
         return $this->data;
     }
+
+    public function obtenerFoto($id)
+    {
+        $stmt = $this->conexion->prepare('SELECT foto FROM lugar WHERE id = :id');
+        $stmt->execute(array('id'=>$id));
+
+        while ($rows = $stmt->fetchAll(PDO::FETCH_ASSOC)) {
+            $this->data[] = $rows;
+        }
+        return $this->data;
+    }
+
+    public function obtenerLugar($id){
+        $stmt = $this->conexion->prepare('SELECT * FROM lugar WHERE id = :id');
+        $stmt->execute(array('id'=>$id));
+
+        while ($rows = $stmt->fetchAll(PDO::FETCH_ASSOC)) {
+            $this->data[] = $rows;
+        }
+        return $this->data;
+    }
+
 }
