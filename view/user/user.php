@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../view/css/styles.css" >
-    <title>Document</title>
+    <title>Inicio</title>
 </head>
 
 <body>
@@ -18,26 +18,18 @@
     ?>
 
 
-    <nav class="navbar">
-        <div class="user-info">
-            <span>Bienvenido, <?php echo $_SESSION["user_sesion"];  ?></span>
-        </div>
-        <ul class="nav-links">
-            <li><a href="../../controller/logout.php" class="logout">Cerrar Sesión</a></li>
-        </ul>
-    </nav>
+        <?php 
+        include("../templates/user/navbar.php");
+        ?> 
 
     <div class="sidebar">
-
-
-        <div class="div-sidebar">
-            <h3 class="title-sidebar">¿Que deseas realizar?</h3>
-            <ul>
-                <li><a href="user.php">Volver al inicio</a></li>
-                <li><a href="index.php">Ver centros turísticos</a></li>
-            </ul>
-        </div>
-
+            <div class="div-sidebar">
+                <h3 class="title-sidebar">¿Que deseas realizar?</h3>
+                <ul>
+                    <li><a href="user.php">Volver al inicio</a></li>
+                    <li><a href="index.php">Ver centros turísticos</a></li>
+                </ul>
+            </div>
     </div>
 
     <div class="content">

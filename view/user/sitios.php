@@ -8,38 +8,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../view/css/styles.css">
-    <title>Document</title>
+    <title>Lugares Turísticos</title>
 </head>
 
 <body>
     <?php
     if (isset($_SESSION["user_sesion"])) :
     ?>
-        <nav class="navbar">
-            <div class="user-info">
-                <span>Bienvenido, <?php echo $_SESSION["user_sesion"];  ?></span>
-            </div>
-            <ul class="nav-links">
-                <li><a href="../../controller/logout.php" class="logout">Cerrar Sesión</a></li>
-            </ul>
-        </nav>
-
-        <div class="sidebar">
-
-
-            <div class="div-sidebar">
-                <h3 class="title-sidebar">¿Que deseas realizar?</h3>
-                <ul>
-                    <li><a href="user.php">Volver al inicio</a></li>
-                    <li><a href="#">Ver centros turísticos</a></li>
-                </ul>
-            </div>
-
-        </div>
+    
+        <?php 
+        include("../templates/user/navbar.php");
+        include("../templates/user/sidebar.php");       
+        ?> 
 
         <div class="content">
 
-            <?php
+        <div class="div__audio">
+            <audio controls controlsList="nodownload" autoplay class="audio__player" id="mediaPlayer">
+                        <source src="../sound/Canto_a_mi_Huehuetenango.m4a" type="audio/m4a">
+                        <source src="../sound/Turismo_Guatemalteco.mp3" type="audio/mp3">
+                        <source src="../sound/Noche_de_luna_entre_ruinas.mp3" type="audio/mp3">
+            </audio>
+        </div>
+        
+
+
+        <?php
 
         if(!empty($lugares)):
 
@@ -64,10 +58,7 @@
         <?php header("Location: ../../controller/logout.php"); ?>
     <?php endif ?>
 
-
-
-
-
+   <script src="../js/scripts.js"></script>
 
 </body>
 

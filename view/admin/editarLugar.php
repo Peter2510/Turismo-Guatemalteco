@@ -18,35 +18,10 @@ session_start();
     ?>
 
 
-    <nav class="navbar">
-        <div class="user-info">
-            <span>Bienvenido, <?php echo $_SESSION["admin_sesion"];  ?></span>
-        </div>
-        <ul class="nav-links">
-            <li><a href="../../controller/logout.php" class="logout">Cerrar Sesión</a></li>
-        </ul>
-    </nav>
-
-    <div class="sidebar">
-    <h1>Admin</h1>
-    <br>
-      <a href="dashboard.php">Volver al inicio</a>
-    <div class="div-sidebar">
-      <h3 class="title-sidebar">Lugares</h3>
-      <ul>
-        <li><a href="index.php?o=add">Agregar</a></li>
-        <li><a href="index.php?o=edit">Editar</a></li>
-      </ul>
-    </div>
-
-    <div class="div-sidebar">
-      <h3 class="title-sidebar">Usuarios</h3>
-      <ul>
-      <li><a href="#">Listar</a></li>
-      </ul>
-    </div>
-
-  </div>
+        <?php 
+            include("../templates/admin/navbar.php");
+            include("../templates/admin/sidebar.php");       
+        ?> 
 
     <div class="content">
   
