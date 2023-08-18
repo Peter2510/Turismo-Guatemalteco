@@ -24,7 +24,7 @@ class Model
     /**INSERTAR ADMINISTRADORES */
     public function insertarAdmin($correo,$contrasenia,$usuario)
     {
-        $stmt = $this->conexion->prepare('INSERT INTO admin VALUES (:correo,:contrasenia),:usuario)');
+        $stmt = $this->conexion->prepare('INSERT INTO admin VALUES (:correo,AES_ENCRYPT(:contrasenia, "cunocXela2023"),:usuario)');
         $stmt->execute(array('correo' => $correo,'contrasenia' => $contrasenia,'usuario'=>$usuario));
 
         if ($stmt) {
@@ -37,9 +37,31 @@ class Model
     /**CONSULTAR ADMINISTRADORES */
     public function consultarAdmin($correo,$contrasenia)
     {
-        $stmt = $this->conexion->prepare('SELECT * FROM admin WHERE correo = :correo AND contrasenia = :contrasenia');
+        $stmt = $this->conexion->prepare('SELECT * FROM admin WHERE correo = :correo AND contrasenia = AES_ENCRYPT(:contrasenia, "cunocXela2023")');
         $stmt->execute(array('correo' => $correo,'contrasenia' => $contrasenia));
         
+        while ($rows = $stmt->fetchAll(PDO::FETCH_ASSOC)) {
+            $this->data[] = $rows;
+        }
+        return $this->data;
+    }
+    
+    /**CONSULTAR CORREO ADMINISTRADORES */
+    public function consultarCorreoAdmin($correo)
+    {
+        $stmt = $this->conexion->prepare('SELECT * FROM admin WHERE correo = :correo');
+        $stmt->execute(array('correo' => $correo));
+        
+        while ($rows = $stmt->fetchAll(PDO::FETCH_ASSOC)) {
+            $this->data[] = $rows;
+        }
+        return $this->data;
+    }
+
+    public function listarAdmin(){
+        $stmt = $this->conexion->prepare('SELECT * FROM admin');
+        $stmt->execute();
+
         while ($rows = $stmt->fetchAll(PDO::FETCH_ASSOC)) {
             $this->data[] = $rows;
         }
@@ -49,7 +71,7 @@ class Model
     /**INSERTAR USUARIOS */
     public function insertarUsuario($nombre, $correo,$contrasenia,$usuario)
     {
-        $stmt = $this->conexion->prepare('INSERT INTO usuario VALUES (:nombre,:correo,:contrasenia,:usuario)');
+        $stmt = $this->conexion->prepare('INSERT INTO usuario VALUES (:nombre,:correo,AES_ENCRYPT(:contrasenia, "cunocXela2023"),:usuario)');
         $stmt->execute(array('nombre'=>$nombre,'correo' => $correo,'contrasenia' => $contrasenia,'usuario'=>$usuario));
         if ($stmt) {
             return true;
@@ -61,8 +83,20 @@ class Model
     /** CONSULTAR USUARIOS */
     public function consultarUsuario($correo,$contrasenia)
     {
-        $stmt = $this->conexion->prepare('SELECT * FROM usuario WHERE correo = :correo AND contrasenia = :contrasenia');
+        $stmt = $this->conexion->prepare('SELECT * FROM usuario WHERE correo = :correo AND contrasenia = AES_ENCRYPT(:contrasenia, "cunocXela2023")');
         $stmt->execute(array('correo' => $correo,'contrasenia' => $contrasenia));
+        
+        while ($rows = $stmt->fetchAll(PDO::FETCH_ASSOC)) {
+            $this->data[] = $rows;
+        }
+        return $this->data;
+    }
+
+    /**CONSULTAR CORREO USUARIO */
+    public function consultarCorreoUsuario($correo)
+    {
+        $stmt = $this->conexion->prepare('SELECT * FROM usuario WHERE correo = :correo');
+        $stmt->execute(array('correo' => $correo));
         
         while ($rows = $stmt->fetchAll(PDO::FETCH_ASSOC)) {
             $this->data[] = $rows;

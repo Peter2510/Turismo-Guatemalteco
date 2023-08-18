@@ -333,6 +333,12 @@ img {
   margin: 20px;
 }
 
+.footer{
+  display: flex;
+  justify-content: space-around;
+  font-weight: bold;
+}
+
 /* Media query para dispositivos con una anchura máxima de 768px */
 @media screen and (max-width: 768px) {
   .form__title {

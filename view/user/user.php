@@ -50,6 +50,5 @@
     <?php else : ?>
         <?php header("Location: ../../controller/logout.php"); ?>
     <?php endif ?>
-
 </body>
 </html>

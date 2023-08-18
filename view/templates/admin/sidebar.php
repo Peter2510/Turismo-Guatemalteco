@@ -8,5 +8,10 @@
                     <li><a href="index.php?o=add">Agregar</a></li>
                     <li><a href="index.php?o=edit">Editar</a></li>
                 </ul>
+                <h3 class="title-sidebar">Admin</h3>
+                <ul>
+                    <li><a href="index.php?o=add_admin">Agregar</a></li>
+                    <li><a href="index.php?o=list_admin">Listar</a></li>
+                </ul>
             </div>
 </div>

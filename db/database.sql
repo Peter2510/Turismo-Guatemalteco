@@ -9,7 +9,7 @@ CREATE TABLE usuario(
 
     `nombre` VARCHAR(80) NOT NULL,
     `correo` VARCHAR(60) NOT NULL,
-    `contrasenia` VARCHAR(30) NOT NULL,
+    `contrasenia` BLOB NOT NULL,
     `usuario` VARCHAR(80) NOT NULL,
     PRIMARY KEY(`correo`)
 );
@@ -17,9 +17,9 @@ CREATE TABLE usuario(
 
 CREATE TABLE admin(
     `correo` VARCHAR(60) NOT NULL,
-    `contrasenia` VARCHAR(30) NOT NULL,
+    `contrasenia` BLOB NOT NULL,
     `usuario` VARCHAR(80) NOT NULL,
-    PRIMARY KEY(`usuario`)
+    PRIMARY KEY(`correo`)
 
 );
 
@@ -34,11 +34,9 @@ CREATE TABLE lugar(
 );
 
 
-INSERT INTO admin VALUES ("admin1@correo.com", "teo1","admin01");
+INSERT INTO admin VALUES ("admin1@correo.com",AES_ENCRYPT("teo1", "cunocXela2023"),"admin01");
 
-INSERT INTO usuario VALUES ("Pedro G", "user1@correo.com","teo1","user01");
-
-SELECT usuario FROM admin WHERE usuario = 'admin01' AND contrasenia =  aes_decrypt("teo1","1234");
+INSERT INTO usuario VALUES ("Pedro G", "user1@correo.com",AES_ENCRYPT("teo1", "cunocXela2023"),"user01");
 
 
 INSERT INTO lugar VALUES(NULL,"Parque Arqueológico Zaculeu","Huehuetenango","Huehuetenango","Zaculeu es un sitio arqueológico precolombino que se encuentra en el altiplano occidental de Guatemala, específicamente en el departamento de Huehuetenango. Según la documentación, Zaculeu fue habitada durante el periodo Clásico Temprano y sus edificaciones evidencian la influencia de Teotihuacán.Este lugar tiene templos piramidales con escaleras dobles, una serie de plazas y un campo para el juego de pelota.El nombre original de la ciudad fue Chnabjul. Sin embargo, debido al color de sus edificaciones, luego fue nombrada como Zaculeu que significa Tierra Blanca.","zaculeu.jpg");

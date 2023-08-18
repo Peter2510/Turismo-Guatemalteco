@@ -17,8 +17,8 @@ class Controller{
 
         $consulta = new Model();
                
-            $consulta_admin = $consulta->consultarAdmin($correo,$contrasenia);
-            $consulta_user = $consulta->consultarUsuario($correo,$contrasenia);
+        $consulta_admin = $consulta->consultarAdmin($correo,$contrasenia);
+        $consulta_user = $consulta->consultarUsuario($correo,$contrasenia);
             
             if($consulta_admin){
                 session_start();
@@ -31,11 +31,64 @@ class Controller{
                 header("Location: view/user/user.php");
                 exit();
             }else{
-                echo("<script>alert('Usuario o contraseña incorrecto. Verifica tus credenciales')</script>");
+                echo("<script>alert('Usuario o contraseña incorrecta. Verifica tus credenciales')</script>");
             }
         
     }
 
+    static function registroUsuario($nombre,$correo,$contrasenia,$usuario){
+
+        $consulta = new Model();
+               
+        $consulta_admin = $consulta->consultarCorreoAdmin($correo);
+        $consulta_user = $consulta->consultarCorreoUsuario($correo);
+
+        if(empty($consulta_admin)&&empty($consulta_user)){
+
+            if($consulta -> insertarUsuario($nombre,$correo,$contrasenia,$usuario)){
+                echo("<script>alert('Registo exitoso.')</script>");    
+                require_once(realpath($_SERVER["DOCUMENT_ROOT"]) .'/Turismo-Guatemalteco/view/login.php');        
+
+            }else{
+                echo("<script>alert('Intenta nuevamente registrarte.')</script>");    
+            }
+
+        }else{
+            echo("<script>alert('Correo ya registrado. Ingresa otro correo.')</script>");
+        }
+
+    }
+
+
+    static function registroAdmin($correo,$contrasenia,$usuario){
+
+        $consulta = new Model();
+               
+        $consulta_admin = $consulta->consultarCorreoAdmin($correo);
+        $consulta_user = $consulta->consultarCorreoUsuario($correo);
+
+        if(empty($consulta_admin)&&empty($consulta_user)){
+
+            if($consulta -> insertarAdmin($correo,$contrasenia,$usuario)){
+                echo("<script>alert('Registo exitoso.')</script>"); 
+                require_once(realpath($_SERVER["DOCUMENT_ROOT"]) .'/Turismo-Guatemalteco/view/admin/listarAdmin.php');        
+
+            }else{
+                echo("<script>alert('Intenta registrar nuevamente.')</script>");
+            }
+
+        }else{
+            echo("<script>alert('Correo ya registrado. Ingresa otro correo.')</script>");
+            require_once(realpath($_SERVER["DOCUMENT_ROOT"]) .'/Turismo-Guatemalteco/view/admin/agregarAdmin.php');        
+        }
+
+    }
+
+    static function getAdmin(){
+        $consulta = new Model();
+        $admins = $consulta->listarAdmin();
+        require_once(realpath($_SERVER["DOCUMENT_ROOT"]) .'/Turismo-Guatemalteco/view/admin/listarAdmin.php');
+    }
 
     //Mostrar todos los lugares turisticos admin
     static function getLugaresAdmin(){

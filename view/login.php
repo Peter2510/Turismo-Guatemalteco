@@ -12,7 +12,7 @@
 
 <form method="POST" action="index.php" class="form">
     <h2 class="form__title" >Iniciar Sesión</h2>
-
+    <input type="hidden" name="action" value="login">
     <div class="form__container">
         <div class="form__group">
             <input type="text" name="email" id="email" class="form__input" placeholder=" " required >
@@ -30,6 +30,6 @@
     </div>
 
 </form>
-<!--<footer> Copyright &copy; Pedro Gordillo - TS1 </footer> -->
+    <footer class="footer"> Copyright &copy; Pedro Gordillo - TS1 </footer>
 </body>
 </html>

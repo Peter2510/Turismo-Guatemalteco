@@ -10,8 +10,12 @@ if($_SERVER["REQUEST_METHOD"]=="GET"){
     }else if(isset($_GET) && $_GET['o']=='update'){
         $id = $_GET['id'];
         Controller::obtenerLugarAdmin($id);
+    }else if(isset($_GET) && $_GET['o']=='add_admin'){
+        require_once("agregarAdmin.php");
+    }else if(isset($_GET) && $_GET['o']=='list_admin'){
+        Controller::getAdmin();
     }else {
-        header("Location: index.php?o=edit");
+        header("Location: dashboard.php");
         exit;
     }
 }else{
@@ -78,21 +82,19 @@ if($_SERVER["REQUEST_METHOD"]=="GET"){
             }else{
                 echo "<script>alert('Debes ingresar todos los datos solicitados');</script>";
             }
-
-            
-
-    }else{
-
-        echo "else";
-        var_dump($_POST);
-    }
-
-
-
-
-
-
     
+
+        }else if($_POST['action']=='add_admin'){
+
+            if(!empty($_POST['email'])&&!empty($_POST['password'])&&!empty($_POST['user'])){
+    
+                Controller::registroAdmin($_POST['email'],$_POST['password'],$_POST['user']);
+    
+            }else{
+                echo "<script>alert ('Debes ingresar todos los campos solicitados');</script>";
+            }
+    
+        }
 
     
 }
