@@ -107,8 +107,9 @@ class Model
     /**INSERTAR LUGAR */
     public function insertarLugar($nombre,$departamento,$municipio,$descripcion,$foto)
     {
+        $saltoLinea = str_replace(array("\r\n", "\r", "\n"), "<br/>", $descripcion);
         $stmt = $this->conexion->prepare('INSERT INTO lugar VALUES (NULL,:nombre,:departamento,:municipio,:descripcion,:foto)');
-        $stmt->execute(array('nombre'=>$nombre,'departamento'=>$departamento,'municipio'=>$municipio,'descripcion' => $descripcion,'foto' => $foto));
+        $stmt->execute(array('nombre'=>$nombre,'departamento'=>$departamento,'municipio'=>$municipio,'descripcion' => $saltoLinea,'foto' => $foto));
 
         if ($stmt) {
             return true;
@@ -121,8 +122,9 @@ class Model
 
     public function editarLugarSF($id, $nombre,$departamento,$municipio,$descripcion)
     {
+        $saltoLinea = str_replace(array("\r\n", "\r", "\n"), "<br/>", $descripcion);
         $stmt = $this->conexion->prepare('UPDATE lugar SET nombre = :nombre, departamento= :departamento, municipio = :municipio, descripcion = :descripcion WHERE id = :id');
-        $stmt->execute(array('nombre'=>$nombre,'departamento'=>$departamento,'municipio'=>$municipio,'descripcion' => $descripcion, 'id' =>$id  ));
+        $stmt->execute(array('nombre'=>$nombre,'departamento'=>$departamento,'municipio'=>$municipio,'descripcion' => $saltoLinea, 'id' =>$id  ));
 
         if ($stmt) {
             return true;
@@ -133,11 +135,11 @@ class Model
 
     public function editarLugarCF($id, $nombre,$departamento,$municipio,$descripcion,$foto)
     {
-        
+        $saltoLinea = str_replace(array("\r\n", "\r", "\n"), "<br/>", $descripcion);
         $arrayPhoto = $this->obtenerFoto($id);
         unlink(realpath($_SERVER["DOCUMENT_ROOT"]) .'/Turismo-Guatemalteco/view/img/places/'.$arrayPhoto[0][0]["foto"]);
         $stmt = $this->conexion->prepare('UPDATE lugar SET nombre = :nombre, departamento= :departamento, municipio = :municipio, descripcion = :descripcion, foto = :foto WHERE id = :id');
-        $stmt->execute(array('nombre'=>$nombre,'departamento'=>$departamento,'municipio'=>$municipio,'descripcion' => $descripcion,'foto'=>$foto, 'id'=> $id ));
+        $stmt->execute(array('nombre'=>$nombre,'departamento'=>$departamento,'municipio'=>$municipio,'descripcion' => $saltoLinea,'foto'=>$foto, 'id'=> $id ));
 
         if ($stmt) {
             return true;

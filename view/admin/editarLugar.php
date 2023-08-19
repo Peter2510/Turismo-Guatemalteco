@@ -48,7 +48,7 @@ session_start();
         </div>
 
         <div class="form__group">
-            <textarea type="text" name="description" id="description" class="form__input" placeholder=" " required><?php echo $lugar[0][0]['descripcion']?></textarea>
+            <textarea type="text" name="description" id="description" class="form__input" placeholder=" " required><?php echo str_replace(array("<br/>"), "\n", $lugar[0][0]['descripcion']);  ?></textarea>
             <label for="description" class="form__label">Descripción:</label>
             <span class="form__line"></span>
         </div>
