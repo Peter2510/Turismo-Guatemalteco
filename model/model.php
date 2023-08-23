@@ -107,6 +107,7 @@ class Model
     /**INSERTAR LUGAR */
     public function insertarLugar($nombre,$departamento,$municipio,$descripcion,$foto)
     {
+
         $saltoLinea = str_replace(array("\r\n", "\r", "\n"), "<br/>", $descripcion);
         $stmt = $this->conexion->prepare('INSERT INTO lugar VALUES (NULL,:nombre,:departamento,:municipio,:descripcion,:foto)');
         $stmt->execute(array('nombre'=>$nombre,'departamento'=>$departamento,'municipio'=>$municipio,'descripcion' => $saltoLinea,'foto' => $foto));

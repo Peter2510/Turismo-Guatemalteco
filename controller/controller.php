@@ -114,7 +114,7 @@ class Controller{
             header("Location: index.php?o=edit");
             exit;   
         }else{
-            echo "<script>alert('No pudo agregarse el centro turistico, verifica los datos ingresados');</script>";
+            echo "<script>alert('No pudo agregarse el centro turístico, el centro turístico ya está registrado');</script>";
         }
 
     }
